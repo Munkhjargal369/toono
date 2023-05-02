@@ -28,9 +28,7 @@ export class Piece {
     getLoc(otherPiece: Piece): Position{
         return otherPiece.position;
     }
-       
     
-
     clone(): Piece {
         return new Piece(this.position.clone(),
               this.team, this.hasMoved,

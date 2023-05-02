@@ -10,6 +10,7 @@ import { useEffect } from "react";
 //import {row ,col , GRID_SIZE } from './initialBoard';
 /**/
 const row = ["q", "w", "e", "r", "t",'y','u','i','o','p'];
+const row2 = ["1", "2", "3", "4", "5",'6','7','8','9','p'];
 const col = [ 1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10];
 const GRID_SIZE = 50;
 
@@ -18,6 +19,12 @@ const piles = [ 'q3','q5','q7','w2', 'w8',
                 't1','t3','t5','t7','t9',
                 'u1','u3','u5','u7','u9',
                 'i2','i8', 'o3','o5','o7'];
+
+const piles2 = [ '13','15','17','22', '28', 
+                '31','33','35','37', '39', 
+                '51','53','55','57','59',
+                '71','73','75','77','79',
+                '82','88', '93','95','97'];
 
 const player1 = ['q3', 'q5','q7', 'e3','e5','e7'];
 const player2 = ['u3', 'u5','u7', 'o3','o5','o7'];
@@ -32,13 +39,13 @@ export default function ToonoBoard({ playMove , pieces } :Props){
 
     let board = [];
 
-    for( let i = 0; i<row.length ; ++i){
+    for( let i = 0; i<row2.length ; ++i){
         for(let j = 0; j<col.length; ++j){
-            let pile = row[i] + col[j]
-            board.push(<Tile id = {pile} />)
+            let pile:string = row2[i] + col[j]
+            board.push(<Tile id = {pile} pieces={pieces}/>)
         }
     }
-   
+
     const [activePiece , setActivePiece] = useState <HTMLElement | null>(null);
     const [grabPostion , setGrabPostition] = useState<Position>(new Position(-1,-1));
     const [destination , setDestination] = useState<Position>(new Position(-1,-1));
@@ -120,8 +127,6 @@ export default function ToonoBoard({ playMove , pieces } :Props){
         }
     }
 
-
-   // let currentPiece = activePiece != null ? pieces.find(p => p.samePosition(grabPosition)) : undefined;
     return (
         
             <div 
@@ -151,6 +156,5 @@ export default function ToonoBoard({ playMove , pieces } :Props){
                 <div className="line15"></div>
                 <div className="line16"></div>               
             </div>
-         
     )
 }

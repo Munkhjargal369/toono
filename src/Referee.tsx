@@ -7,17 +7,22 @@ import { initialBoard } from "./component/initialBoard";
 import ToonoBoard from "./component/ToonoBoard";
 import { white_win, black_win } from "./component/initialBoard";
 import { stringify } from "querystring";
-import './assets/blackWon.jpg';
+import blackWon from  './assets/blackWon.jpg';
+import temp from './assets/starter.png';
+import whiteWon from './assets/whiteWon.jpg';
 
 
 export default function Referee() {
 
-    const [board , setBoard] = useState<Board>(initialBoard);
+    let init = initialBoard.clone();
+    const [board , setBoard] = useState<Board>(init);
     const [flag, setFlag] = useState<Boolean>(false);
+    const [won , setWon] = useState<String>();
+    const [reset, setReset] = useState<Boolean>(false);
 
-    
+    let timer : [Piece , Position];
+
     function playMove(playedPiece : Piece, destination : Position):boolean{
-
         console.log("start" , playedPiece.position)
 
         if(playedPiece.team === playerName.OUR && board.totalTurns %2 !==1){
@@ -36,11 +41,13 @@ export default function Referee() {
         let positionExists = posmoves.some(pos => pos.samePosition(destination));
 
         console.log("bolomjit nvvdel: " , posmoves);
-       // console.log(positionExists);
+        // console.log(positionExists);
         if(positionExists){
+            //timer.push(playedPiece , playedPiece.position);
+
             playedPiece.position = destination;
             console.log("end" , playedPiece.position);
-
+           
             setBoard(() => {
                 const clonedBoard = board.clone();
                 clonedBoard.totalTurns += 1;
@@ -174,13 +181,10 @@ export default function Referee() {
                 }
             });
 
-            //console.log(JSON.stringify(check))
-            //console.log(JSON.stringify(white_win))
-            //console.log(JSON.stringify(black_win))
-
             if(JSON.stringify(check) === JSON.stringify(white_win)){
                 setFlag(true)
                 console.log("WHITE WIN");
+                setWon(whiteWon);
             }
         }
         else{
@@ -211,42 +215,50 @@ export default function Referee() {
 
             if(JSON.stringify(check) === JSON.stringify(black_win)){
                 setFlag(true);
+                setWon(blackWon);
                 console.log("BLACK IS WIN")
             }
         }
-
         return ret;
-
     }
-    function wonDisplay() {
-        const shouldShowWarning = true;
-      
-        return (
-          <div>
-            {(
-              <div style={{ background: 'red', color: 'white', padding: '10px' }}>
-                Warning: This component is in development mode.
-              </div>
-            )}
-          </div>
-        );
-      }
+    
+    function playGame(){
+        if(flag){
+            let init = initialBoard.clone();
+            setBoard(init);
+            setFlag(false);
+            setWon("");
+        }
+    }
+
+    function resetGame(){
+        let init = initialBoard.clone();
+        setBoard(init);
+        setWon("");
+       // ToonoBoard(playMove ,board.pieces , true);
+    }
+
+
     return <>
+
         <div style={ {height: "500px", width: "250px", backgroundColor: "#bbc5c4", marginRight:"100px"}}>
             <p style={{textAlign: "center", color: "black", fontSize: "24px",}}>Turn count : {board.totalTurns}<br></br>Turn player: {board.currentTeam}</p>
 
             <div style={{margin: "50px"}}>
-                <button>reset game</button>
+                <button onClick={e => resetGame()}>reset game</button>
                 <br></br><br></br>
-                <button>play game</button>
+                <button onClick={e => playGame()}>play game</button>
+                <br></br><br></br>
+                
             </div>
             
         </div>
-        {flag && <ToonoBoard playMove={playMove} pieces={board.pieces} />}
-        {!flag && (<div style = {{height: "500px", width: "500px",display:"flex" }}><image href='./assets/blackWon.jpg'></image></div>)}
+
+        {!flag && <ToonoBoard playMove={playMove} pieces={board.pieces} />}
+        {flag && (<div style = {{height: "500px", width: "500px", backgroundImage: `url(${won})`}}></div>)}
 
         <div style={ {height: "500px", width: "250px", backgroundColor: "#bbc5c4", marginLeft:"100px"}}>
-            <p style={{margin: "10px", fontStyle: "Bold"}}>Тойрог хэлбэртэй 25 буудалтай хөлөг дээр 2 тоглогч 6-н хар, 6-н цагаан чулуугаар тоглодог.
+            <p style={{margin: "10px", fontSize: "18px" }}><strong>Тооно хөлөгт тоглоом</strong><br></br>Тойрог хэлбэртэй 25 буудалтай хөлөг дээр 2 тоглогч 6-н хар, 6-н цагаан чулуугаар тоглодог.
             Тоглоход бэлтгэж 6, 6 чулуугаа хөлөгт зохих ёсоор байрлуулна. Цагаан нь эхэлж нүүнэ. Зураасны дагууд нэг нэг буудлаар өөрийн чулууг нүүнэ.
             Шулуун зураасны дагууд зэргэлдээ буудалд хэн нэгний чулуу байвал түүнийг давж нүүж болно.
             Энэхүү тоглоомын зорилт бол хэн нэгэн нь нөгөөгийнхөө 6-н чулууны анхны байрыг түрүүлж эзлэхийг эрмэлзэх явдал мөн.
