@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/toono/static/css/main.8afd05e4.css",
+    "main.js": "/toono/static/js/main.862aca0c.js",
+    "static/media/blackWon.jpg": "/toono/static/media/blackWon.de509436296b30cbecbd.jpg",
+    "index.html": "/toono/index.html",
+    "main.8afd05e4.css.map": "/toono/static/css/main.8afd05e4.css.map",
+    "main.862aca0c.js.map": "/toono/static/js/main.862aca0c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8afd05e4.css",
+    "static/js/main.862aca0c.js"
+  ]
+}
