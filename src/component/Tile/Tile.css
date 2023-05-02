@@ -1,0 +1,32 @@
+.tile{
+    width: 50px;
+    height: 50px;
+}
+.pieceTile{
+    
+        width: 50px;
+        height: 50px;
+        background: gray;
+        border-radius: 40%;
+
+        display: grid;
+        place-content: center;
+        background-size: 40px;
+        background-repeat: no-repeat;
+        background-position: center;
+}
+.pieceTile img {
+    width: 40px;
+    height: 40px;
+ }
+
+.pieceTile .piece {
+    box-align :center;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    border-radius: 10%;
+ }
+ .pieceTile .piece:hover{
+    cursor: grab;
+ }
