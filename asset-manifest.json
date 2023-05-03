@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.css": "/toono/static/css/main.8afd05e4.css",
-    "main.js": "/toono/static/js/main.862aca0c.js",
-    "static/media/blackWon.jpg": "/toono/static/media/blackWon.de509436296b30cbecbd.jpg",
-    "index.html": "/toono/index.html",
-    "main.8afd05e4.css.map": "/toono/static/css/main.8afd05e4.css.map",
-    "main.862aca0c.js.map": "/toono/static/js/main.862aca0c.js.map"
+    "main.css": "/toono2/static/css/main.3373e516.css",
+    "main.js": "/toono2/static/js/main.6bcc3d93.js",
+    "static/media/blackWon.jpg": "/toono2/static/media/blackWon.058c9f8dcacca4cc40ea.jpg",
+    "static/media/whiteWon.jpg": "/toono2/static/media/whiteWon.2d4972745313be456f84.jpg",
+    "index.html": "/toono2/index.html",
+    "main.3373e516.css.map": "/toono2/static/css/main.3373e516.css.map",
+    "main.6bcc3d93.js.map": "/toono2/static/js/main.6bcc3d93.js.map"
   },
   "entrypoints": [
-    "static/css/main.8afd05e4.css",
-    "static/js/main.862aca0c.js"
+    "static/css/main.3373e516.css",
+    "static/js/main.6bcc3d93.js"
   ]
 }
